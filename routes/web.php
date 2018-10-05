@@ -17,7 +17,19 @@ Route::get('/countries/{code}', 'Countries@read');
 Route::get('/countries/{code}/theory/{id}', 'Theory@read');
 Route::get('/countries/{code}/theory/{id}/quiz', 'Quiz@read');
 
-
 Auth::routes();
+Route::prefix('/register') ->group(function()
+{
+	Route::get('/', function(){return response('404', 404);});
+	Route::post('/', function(){return response('404', 404);});
+	Route::patch('/', function(){return response('404', 404);});
+	Route::delete('/', function(){return response('404', 404);});
+});
 
-Route::get('/admin', 'HomeController@index')->name('home');
+Route::prefix('/admin') -> middleware('auth') -> group(function()
+{
+	Route::get('/', 'Admin\Index@index');
+	Route::get('/countries/{code}', 'Admin\Countries@read');
+	Route::get('/countries/{code}/theory/{id}', 'Admin\Theory@read');
+	Route::get('/countries/{code}/theory/{id}/quiz', 'Admin\Quiz@read');
+});

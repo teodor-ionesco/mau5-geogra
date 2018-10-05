@@ -1,6 +1,6 @@
 @extends('global')
 
-@section('title') {{ $THEORY -> title }} - Quiz @endsection
+@section('title') @endsection
 
 @section('body')
 	<div class="container">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Quiz as MQuiz;
+use App\Theory as MTheory;
 use Illuminate\Http\Request;
 
 class Quiz extends Controller
@@ -26,6 +27,7 @@ class Quiz extends Controller
     	}
 
     	return view('quiz', [
+            'THEORY' => MTheory::where('id', $id) -> first(),
     		'QUIZ' => $out,
     	]);
     }
