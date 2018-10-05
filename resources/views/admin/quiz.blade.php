@@ -1,108 +1,101 @@
 @extends('global')
 
-@section('title') @endsection
+@section('title')  @endsection
 
 @section('body')
-	<div class="container">
-		<div id="wrapper">
 
-		</div>
+	<div class="container">
+		<form method="POST">
+			{{ csrf_field() }}
+			<input type="text" name="_method" value="PATCH" hidden="">
+			<a class="btn waves-effect waves-light red" href="{{ url() -> current() }}/delete">Delete Quiz</a>
+			<a class="btn waves-effect waves-light blue" href="{{ str_replace('/admin', '', url() -> current()) }}">View Quiz</a>
+			<hr>
+			<div id="sets">
+				@foreach($QUIZ as $key => $set)
+					<table id="{{ $key }}" class="striped">
+						<tr>
+							<td>Question:&nbsp;</td> 
+							<td><input type="text" name="quiz[{{ $key }}][question]" value="{{ $set['question'] }}" required></td> 
+						</tr> 
+						<tr> 
+							<td>Answer1:&nbsp;</td> 
+							<td><input type="text" name="quiz[{{ $key }}][0]" value="{{ $set['answers'][0] }}" required></td> 
+						</tr> 
+						<tr> 	
+							<td>Answer2:&nbsp;</td> 
+							<td><input type="text" name="quiz[{{ $key }}][1]" value="{{ $set['answers'][1] }}" required></td> 
+						</tr>
+						<tr> 
+							<td>Answer3:&nbsp;</td> 
+							<td><input type="text" name="quiz[{{ $key }}][2]" value="{{ $set['answers'][2] }}" required></td> 
+						</tr> 
+						<tr> 
+							<td>Answer4:&nbsp;</td> 
+							<td><input type="text" name="quiz[{{ $key }}][3]" value="{{ $set['answers'][3] }}" required></td> 
+						</tr>
+					</table> 
+					<div>
+						<a class="btn waves-effect waves-light blue" href="#!" onclick="delete_question('{{ $key }}');">Delete set</a>
+						<div class="divider"></div>
+					</div>
+				@endforeach
+			</div>
+			<br>
+			<button class="btn waves-effect waves-light red" type="submit">Submit</button> 
+			<a class="btn waves-effect waves-light blue" href="#!" onclick="add_question();">Add question</a>
+		</form>		
 	</div>
+
 @endsection
 
 @section('js')
 //<script>
-	var questions = <?= json_encode($QUIZ) ?>;
 
-	var qNum = <?= count($QUIZ) ?>;
-	var aNum = <?= count($QUIZ[0]['answers']) ?>;
-	
-	var qCount = 0;
-	var question = -1;
-	var answer = -1;
-	var wrong = 0;
-	
-	function mix_answers()
-	{
-		var count = 0;
-		var someint;
-		
-		while(true)
-		{
-			if(count === aNum)
-				break;
-			
-			someint = Math.floor(Math.random() * aNum);
-			
-			if(questions[question].answers[someint] === '')
-				continue;
-			
-			$('#mix_questions').html($('#mix_questions').html() + '<p> \
-			  <label> \
-				<input class="with-gap" name="answer" value="'+someint+'" type="radio" /> \
-				<span>'+questions[question].answers[someint]+'</span> \
-			  </label> \
-			</p>');
-			
-			questions[question].answers[someint] = '';
-			
-			count++;
-		}
-	}
-	
-	function mix_quiz()
-	{
-		if(qCount === qNum)
-		{
-			alert('Felicitări! În total au fost '+qNum+' întrebări. Ai răspuns greșit de '+wrong+' ori. Success tura viitoare!');
-			return;
-		}
-		
-		$('#wrapper').html('				<p class="flow-text" id="mix_question"></p> \
-		<div id="mix_questions"></div> \
-		<a class="btn waves-effect waves-light red" onclick="check();">Verifică</a> &nbsp;&nbsp;&nbsp;');
+	var gQC = -1;
 
-		var someint;
-		
-		while(true)
-		{
-			someint = Math.floor(Math.random() * qNum);
-			
-			if(questions[someint] === '')
-				continue;
-			
-			$('#mix_question').html(questions[someint].question);
-			question = someint;
-		
-			mix_answers();
-			
-			answer = questions[someint].correct;
-			
-			questions[someint] = '';
-			
-			qCount++;
-			
-			break;
-		}
-	}	
-	
-	function check()
+	function add_question()
 	{
-		if(parseInt($('input[name=answer]:checked').val()) === answer)
-		{
-			alert('Corect!');
-			$('#wrapper').html($('#wrapper').html() + '<a class="btn waves-effect waves-light red" onclick="mix_quiz();">Next</a>');
-		}
-		else
-		{
-			alert('Greșit! Reîncearcă.');
-			wrong++;
-		}
+		$('#sets').html(
+			$('#sets').html() 
+			+ 
+			'<table id="'+gQC+'"> \
+				<tr> \
+					<td>Question:&nbsp;</td> \
+					<td><input type="text" name="quiz['+gQC+'][question]" value="" required></td> \
+				</tr> \
+				<tr> \
+					<td>Answer1:&nbsp;</td> \
+					<td><input type="text" name="quiz['+gQC+'][0]" value="" required></td> \
+				</tr> \
+				<tr> 	\
+					<td>Answer2:&nbsp;</td> \
+					<td><input type="text" name="quiz['+gQC+'][1]" value="" required></td> \
+				</tr>\
+				<tr> \
+					<td>Answer3:&nbsp;</td> \
+					<td><input type="text" name="quiz['+gQC+'][2]" value="" required></td> \
+				</tr> \
+				<tr> \
+					<td>Answer4:&nbsp;</td> \
+					<td><input type="text" name="quiz['+gQC+'][3]" value="" required></td> \
+				</tr>\
+			</table> \
+			<div>\
+				<a class="btn waves-effect waves-light blue" href="#!" onclick="delete_question('+gQC+');">Delete set</a> \
+				<div class="divider"></div>\
+			</div> \
+		');
+
+		gQC--;
 	}
-	
-	$(document).ready(function()
+
+	function delete_question(id)
 	{
-		mix_quiz();
-	});
-// </script>
+		$('#'+id).next().remove();
+		$('#'+id).remove();
+	}
+
+
+//</script>
 @endsection

@@ -19,6 +19,7 @@ class Quiz extends Migration
             $table -> string('question');
             $table -> text('answers');
             $table -> integer('correct');
+            $table -> string('country');
             $table->timestamps();
         });
     }

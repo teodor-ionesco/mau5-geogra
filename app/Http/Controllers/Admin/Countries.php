@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Countries as MCountries;
 use App\Generalities as MGeneralities;
 use App\Theory as MTheory;
+use App\Quiz as MQuiz;
 
 class Countries extends Controller
 {
@@ -15,8 +16,30 @@ class Countries extends Controller
     {
     	return view('admin.country', [
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
-    		'GEN' => MGeneralities::where('country', $code) -> select(['name', 'url']) -> get(),
+    		'GEN' => MGeneralities::where('country', $code) -> select(['id', 'name', 'url']) -> get(),
     		'THEORY' => MTheory::where('country', $code) -> select(['id', 'title']) -> get(),
     	]);
+    }
+
+    public function create()
+    {
+    	$this -> validate(request(), [
+    		'name' => 'required',
+    		'code' => 'required',
+    	]);
+
+    	MCountries::insert(request(['name', 'code']));
+
+    	return redirect('/admin', 301);
+    }
+
+    public function delete($code)
+    {
+    	MQuiz::where('country', $code) -> delete();
+    	MTheory::where('country', $code) -> delete();
+    	MGeneralities::where('country', $code) -> delete();
+    	MCountries::where('code', $code) -> delete();
+
+    	return redirect('/admin', 301);
     }
 }
