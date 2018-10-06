@@ -6,6 +6,8 @@
     .materialize-textarea
     {
         border: 1px solid black !important; 
+        font-size: 20px;
+        font-family: consolas, sans-serif;
     }
 </style>
 @endsection
