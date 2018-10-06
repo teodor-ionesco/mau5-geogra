@@ -12,20 +12,24 @@
                 <i>(<a class="red-text" href="{{ url() -> current() }}/generalities/{{ $object -> id }}/delete">delete</a>)</i></li>
             @endforeach
 
-            <form action="{{ url() -> current() }}/generalities" method="POST">
-                {{ csrf_field() }}
-                <table class="striped">
-                    <tr>
-                        <td>Title:&nbsp;</td>
-                        <td><input type="text" required="" name="title"></td>
-                    </tr>
-                    <tr>
-                        <td>URL:&nbsp;</td>
-                        <td><input type="text" required="" name="url"></td>
-                    </tr>
-                </table>
-                <button type="submit" class="btn waves-effect waves-light red" >Add</button>
-            </form>
+            <div class="row" style="position:relative; right: 40px;">
+                <div class="col s12 m8 l6">
+                    <form action="{{ url() -> current() }}/generalities" method="POST">
+                        {{ csrf_field() }}
+                        <table class="striped">
+                            <tr>
+                                <td>Title:&nbsp;</td>
+                                <td><input type="text" required="" name="title"></td>
+                            </tr>
+                            <tr>
+                                <td>URL:&nbsp;</td>
+                                <td><input type="text" required="" name="url"></td>
+                            </tr>
+                        </table>
+                        <button type="submit" class="btn waves-effect waves-light red" >Add</button>
+                    </form>
+                </div>
+            </div>
 
             <br>
             @foreach($THEORY as $object)
@@ -33,17 +37,20 @@
                 &nbsp;
                 <i>(<a class="red-text" href="{{ url() -> current() }}/theory/{{ $object -> id }}/delete">delete</a>)</i></li>
             @endforeach
-
-            <form action="{{ url() -> current() }}/theory" method="POST">
-                {{ csrf_field() }}
-                <table class="striped">
-                    <tr>
-                        <td>Title:&nbsp;</td>
-                        <td><input type="text" required="" name="title"></td>
-                    </tr>
-                </table>
-                <button type="submit" class="btn waves-effect waves-light red" >Add</button>
-            </form>
+            <div class="row" style="position:relative; right: 40px;">
+                <div class="col s12 m8 l6">
+                    <form action="{{ url() -> current() }}/theory" method="POST">
+                        {{ csrf_field() }}
+                        <table class="striped">
+                            <tr>
+                                <td>Title:&nbsp;</td>
+                                <td><input type="text" required="" name="title"></td>
+                            </tr>
+                        </table>
+                        <button type="submit" class="btn waves-effect waves-light red" >Add</button>
+                    </form>
+                </div>
+            </div>
         </ol>
     </div>
 @endsection

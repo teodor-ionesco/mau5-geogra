@@ -1,0 +1,7 @@
+[>] = ►
+[*] = •
+[b][/b] = <b></b>
+[i][/i] = <i></i>
+[m][/m] = <span class="yellow"></span>
+\r\n = <br>
+[tab] = &nbsp;&nbsp;&nbsp;

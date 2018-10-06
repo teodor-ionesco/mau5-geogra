@@ -7,8 +7,8 @@
 	<div class="container">
 		<form method="POST">
 			{{ csrf_field() }}
-			<div id="sets">
-				
+			<div id="sets" class="row">
+
 			</div>
 			<br>
 			<button type="submit" class="btn waves-effect waves-light red">Create</button>
@@ -25,34 +25,34 @@
 
 	function add_question()
 	{
-		$('#sets').html(
-			$('#sets').html() 
-			+ 
-			'<table id="'+gQC+'" class="striped"> \
-				<tr> \
-					<td>Question:&nbsp;</td> \
-					<td><input type="text" name="quiz['+gQC+'][question]" value="" required></td> \
-				</tr> \
-				<tr> \
-					<td>Answer1:&nbsp;</td> \
-					<td><input type="text" name="quiz['+gQC+'][0]" value="" required></td> \
-				</tr> \
-				<tr> 	\
-					<td>Answer2:&nbsp;</td> \
-					<td><input type="text" name="quiz['+gQC+'][1]" value="" required></td> \
-				</tr>\
-				<tr> \
-					<td>Answer3:&nbsp;</td> \
-					<td><input type="text" name="quiz['+gQC+'][2]" value="" required></td> \
-				</tr> \
-				<tr> \
-					<td>Answer4:&nbsp;</td> \
-					<td><input type="text" name="quiz['+gQC+'][3]" value="" required></td> \
-				</tr>\
-			</table> \
-			<div> \
-				<a class="btn waves-effect waves-light blue" href="#!" onclick="delete_question('+gQC+');">Delete set</a> \
-				<div class="divider"></div>\
+		$('#sets').append(
+			'<div id="'+gQC+'" class="col">\
+				<table class="striped"> \
+					<tr> \
+						<td>Question:&nbsp;</td> \
+						<td><input type="text" name="quiz['+gQC+'][question]" value="" required></td> \
+					</tr> \
+					<tr> \
+						<td>Answer1:&nbsp;</td> \
+						<td><input type="text" name="quiz['+gQC+'][0]" value="" required></td> \
+					</tr> \
+					<tr> 	\
+						<td>Answer2:&nbsp;</td> \
+						<td><input type="text" name="quiz['+gQC+'][1]" value="" required></td> \
+					</tr>\
+					<tr> \
+						<td>Answer3:&nbsp;</td> \
+						<td><input type="text" name="quiz['+gQC+'][2]" value="" required></td> \
+					</tr> \
+					<tr> \
+						<td>Answer4:&nbsp;</td> \
+						<td><input type="text" name="quiz['+gQC+'][3]" value="" required></td> \
+					</tr>\
+				</table> \
+				<div> \
+					<a class="btn waves-effect waves-light blue" href="#!" onclick="delete_question('+gQC+');">Delete set</a> \
+					<div class="divider"></div>\
+				</div>\
 			</div> \
 		');
 
@@ -61,7 +61,7 @@
 
 	function delete_question(id)
 	{
-		$('#'+id).next().remove();
+		//$('#'+id).next().remove();
 		$('#'+id).remove();
 	}
 

@@ -51,7 +51,8 @@ class Quiz extends Controller
                 ]);
             }
 
-            return $this -> read($code, $id);
+            return redirect(url() -> current() . '/../');
+            //return $this -> read($code, $id);
         }
         else
         {

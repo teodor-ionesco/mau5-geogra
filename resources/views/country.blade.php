@@ -15,5 +15,6 @@
 				<li><a href="{{ url() -> current() }}/theory/{{ $object -> id }}">{{ $object -> title }}</a></li>
 			@endforeach
 		</ol>
+		<a class="btn waves-effect waves-light blue" href="{{ url() -> current() . '/../../'}}">Înapoi</a>
 	</div>
 @endsection

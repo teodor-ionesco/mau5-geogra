@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Theory as MTheory;
 use App\Quiz as MQuiz;
 use App\Http\Controllers\Controller;
+use App\Formatting\Format;
 
 class Theory extends Controller
 {
     public function read($code, $id)
     {
         $theory = MTheory::where('id', $id) -> first();
+        $theory -> theory = Format::unparse($theory -> theory);
         $quiz = MQuiz::select('id') -> where('theory', $theory -> id) -> first();
 
     	return view('admin.theory', [
@@ -50,7 +52,10 @@ class Theory extends Controller
             'theory' => 'required',
         ]);
 
-        MTheory::where('id', $id) -> update(request(['theory', 'title']));
+        MTheory::where('id', $id) -> update([
+            'title' => request('title'),
+            'theory' => Format::parse(request('theory')),
+        ]);
 
         return redirect(url() -> current());
     }
