@@ -13,8 +13,8 @@ class Countries extends Controller
     {
     	return view('country', [
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
-    		'GEN' => MGEN::where('country', $code) -> get(),
-    		'THEORY' => MTheory::where('country', $code) -> get(),
+    		'GEN' => MGEN::where('country', $code) -> select(['url', 'name']) -> orderBy('name', 'asc') -> get(),
+    		'THEORY' => MTheory::where('country', $code) -> select(['title', 'id']) -> orderBy('title', 'asc') -> get(),
     	]);
     }
 }
