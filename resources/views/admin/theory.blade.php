@@ -1,6 +1,6 @@
 @extends('global')
 
-@section('title') {{$THEORY -> name}} @endsection
+@section('title') Edit theory @endsection
 @section('head')
 <style>
     .materialize-textarea
