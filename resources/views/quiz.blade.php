@@ -4,7 +4,7 @@
 
 @section('body')
 	<div class="container">
-		<a class="btn waves-effect waves-light blue" href="{{ url() -> current() . '/../'}}">Înapoi la teorie</a>
+		<a class="btn waves-effect waves-light blue" href="#" onclick="window.history.go(-1);">Înapoi la teorie</a>
 		<hr>
 		<div id="wrapper">
 

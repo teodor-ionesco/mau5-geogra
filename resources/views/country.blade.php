@@ -11,6 +11,10 @@
 				<li><a href="{{ $object -> url }}">{{ $object -> name }}</a></li>
 			@endforeach
 			<br>
+			@foreach($SECTIONS as $object)
+				<li><a href="{{ url() -> current() }}/sections/{{ $object -> id }}">{{ $object -> name }}</a></li>
+			@endforeach
+			<br>
 			@foreach($THEORY as $object)
 				<li><a href="{{ url() -> current() }}/theory/{{ $object -> id }}">{{ $object -> title }}</a></li>
 			@endforeach

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Theory extends Migration
+class Sections extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class Theory extends Migration
      */
     public function up()
     {
-        Schema::create('theory', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('sections', function(Blueprint $table)
+        {
+            $table -> increments('id');
             $table -> string('country');
-            $table -> text('theory');
-            $table -> string('title');
-            $table -> string('section');
-            $table->timestamps();
+            $table -> string('name');
+            $table -> timestamps();
         });
     }
 
@@ -30,6 +29,6 @@ class Theory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('theory');
+        Schema::dropIfExists('sections');
     }
 }

@@ -14,6 +14,7 @@
 Route::get('/', 'Index@index');
 
 Route::get('/countries/{code}', 'Countries@read');
+Route::get('/countries/{code}/sections/{id}', 'Sections@read');
 Route::get('/countries/{code}/theory/{id}', 'Theory@read');
 Route::get('/countries/{code}/theory/{id}/quiz', 'Quiz@read');
 
@@ -39,6 +40,20 @@ Route::prefix('/admin') -> middleware('auth') -> group(function()
 
 		Route::get('/{code}', 'Admin\Countries@read');
 		Route::get('/{code}/delete', 'Admin\Countries@delete');
+	});
+
+	// Sections
+	Route::prefix('/countries/{code}/sections') -> group(function()
+	{
+		Route::get('/', 'Admin\Sections@index');
+		Route::post('/', 'Admin\Sections@create');
+
+		Route::prefix('/{id}') -> group(function()
+		{
+			Route::get('/', 'Admin\Sections@read');
+			Route::get('/delete', 'Admin\Sections@delete');
+			Route::post('/theory', 'Admin\Theory@create');
+		});
 	});
 
 	// Theory

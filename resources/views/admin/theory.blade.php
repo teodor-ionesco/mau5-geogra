@@ -24,7 +24,15 @@
                 |
                 <a href="{{ url() -> current() . '/../../' }}">Back to sections</a>
             )</i>
-
+            <div style="width: 60%;" title="Change theory's section">
+                <select name="section">
+                    <option id="select_option_origin" value="0">None (unsectioned)</option>
+                    @foreach($SECTIONS as $object)
+                        <option value="{{ $object -> id }}" @if($THEORY -> section == $object -> id) selected @endif>{{ $object -> name }}</option>
+                    @endforeach
+                </select>
+                <label>Sections</label>
+            </div>
             <br>
             <br>
         	<textarea name="theory" class="materialize-textarea">{{ $THEORY -> theory }}</textarea>
@@ -38,4 +46,18 @@
         	<a class="btn waves-effect waves-light" href="{{ url() -> current() }}/quiz/make">Make Quiz</a>
         @endif
     </div>
+@endsection
+
+@section('js')
+//<script>
+  /*document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });*/
+  
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+       
+//</script>
 @endsection

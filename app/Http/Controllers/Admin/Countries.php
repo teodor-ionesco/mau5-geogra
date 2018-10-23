@@ -9,6 +9,7 @@ use App\Countries as MCountries;
 use App\Generalities as MGeneralities;
 use App\Theory as MTheory;
 use App\Quiz as MQuiz;
+use App\Sections as MSections;
 
 class Countries extends Controller
 {
@@ -16,9 +17,10 @@ class Countries extends Controller
     {
     	return view('admin.country', [
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
+            'SECTIONS' => MSections::where('country', $code) -> select(['id', 'name']) -> orderBy('name', 'asc') -> get(),
     		'GEN' => MGeneralities::where('country', $code) -> orderBy('name', 'asc') -> select(['id', 'name', 'url']) -> get(),
-    		'THEORY' => MTheory::where('country', $code) -> select(['id', 'title']) -> orderBy('title', 'asc') -> get(),
-    	]);
+    		'THEORY' => MTheory::where('section', 0) -> select(['id', 'title']) -> orderBy('title', 'asc') -> get(),
+        ]);
     }
 
     public function create()
