@@ -24,7 +24,7 @@ class Search extends Controller
 		return view('admin.search', [
 			'QUERY' => $this -> query,
 			'RESULTS' => $this -> results,
-			'MESSAGE' => $this -> message,
+			'MESSAGE' => $this -> unmap_phrase($this -> message),
 		]);
 	}
 
@@ -116,4 +116,26 @@ class Search extends Controller
 	    
 	    return $tmp;
 	}
+
+	/*
+	*	Un-map phrase
+	*/
+	private function unmap_phrase(string $phrase) : string
+	{
+	    // Trim regex directives
+	    $tmp = str_replace('\.', '.', $tmp);
+	    $tmp = str_replace('\(', '(', $tmp);
+	    $tmp = str_replace('\)', ')', $tmp);
+	    $tmp = str_replace('\|', '|', $tmp);
+	    $tmp = str_replace('\[', '[', $tmp);
+	    $tmp = str_replace('\]', ']', $tmp);
+	    $tmp = str_replace('\{', '{', $tmp);
+	    $tmp = str_replace('\}', '}', $tmp);
+	    $tmp = str_replace('\+', '+', $tmp);
+	    
+	    // Set regex directives
+	    $tmp = str_replace('.*', ' ', $tmp);
+	    
+	    return $tmp;
+	}	
 }
