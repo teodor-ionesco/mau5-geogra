@@ -24,7 +24,7 @@ class Search extends Controller
 		return view('search', [
 			'QUERY' => $this -> query,
 			'RESULTS' => $this -> results,
-			'MESSAGE' => $this -> unmap_phrase($this -> message),
+			'MESSAGE' => !empty($this -> message) ? $this -> unmap_phrase($this -> message) : null,
 		]);
 	}
 
