@@ -35,8 +35,11 @@ class Search extends Controller
 			$this -> message = 'Please fill in search field. Note that search must contain at least three characters.';
 			return $this -> index();
 		}
+<<<<<<< HEAD
 		
 		$this -> query = $this -> map_phrase($request -> input('phrase'));
+=======
+>>>>>>> 095a712676dee8e026abc405badf61beb84fdc52
 
 		/*
 		*	Countries
@@ -44,9 +47,16 @@ class Search extends Controller
 		$tmp = MCountries::select(['name', 'code']) -> get();
 		foreach($tmp as $key => $object)
 		{
+<<<<<<< HEAD
 			$name = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> name));
 			
 			if(preg_match("|".$this -> query."|", $name) === 1)
+=======
+			$search = strtolower(str_replace($this -> chars[1], $this -> chars[0], $request -> input('phrase')));
+			$name = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> name));
+			
+			if(strpos($name, $search) !== false)
+>>>>>>> 095a712676dee8e026abc405badf61beb84fdc52
 				$this -> results['countries'][$key] = $object;
 		}
 
@@ -56,9 +66,16 @@ class Search extends Controller
 		$tmp = MGeneralities::select(['name', 'url', 'country']) -> get();
 		foreach($tmp as $key => $object)
 		{
+<<<<<<< HEAD
 			$name = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> name));
 			
 			if(preg_match("|".$this -> query."|", $name) === 1)
+=======
+			$search = strtolower(str_replace($this -> chars[1], $this -> chars[0], $request -> input('phrase')));
+			$name = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> name));
+			
+			if(strpos($name, $search) !== false)
+>>>>>>> 095a712676dee8e026abc405badf61beb84fdc52
 				$this -> results['generalities'][$key] = $object;
 		}
 
@@ -68,9 +85,16 @@ class Search extends Controller
 		$tmp = MSections::select(['name', 'id', 'country']) -> get();
 		foreach($tmp as $key => $object)
 		{
+<<<<<<< HEAD
 			$name = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> name));
 			
 			if(preg_match("|".$this -> query."|", $name) === 1)
+=======
+			$search = strtolower(str_replace($this -> chars[1], $this -> chars[0], $request -> input('phrase')));
+			$name = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> name));
+			
+			if(strpos($name, $search) !== false)
+>>>>>>> 095a712676dee8e026abc405badf61beb84fdc52
 				$this -> results['sections'][$key] = $object;
 		}
 
@@ -80,17 +104,28 @@ class Search extends Controller
 		$tmp = MTheory::select(['title', 'id', 'country', 'theory']) -> get();
 		foreach($tmp as $key => $object)
 		{
+<<<<<<< HEAD
 			$title = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> title));
 			$theory = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> theory));
 			
 			if(preg_match("|". $this -> query ."|", $title) === 1)
 				$this -> results['theory'][$key] = $object;
 			else if(preg_match("|". $this -> query ."|", $theory) === 1)
+=======
+			$search = strtolower(str_replace($this -> chars[1], $this -> chars[0], $request -> input('phrase')));
+			$title = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> title));
+			$theory = strtolower(str_replace($this -> chars[1], $this -> chars[0], $object -> theory));
+			
+			if(strpos($title, $search) !== false)
+				$this -> results['theory'][$key] = $object;
+			else if(strpos($theory, $search) !== false)
+>>>>>>> 095a712676dee8e026abc405badf61beb84fdc52
 				$this -> results['theory'][$key] = $object;
 		}
 
 		return $this -> index();
 	}
+<<<<<<< HEAD
 	
 	/*
 	*   Map search phrase
@@ -116,4 +151,6 @@ class Search extends Controller
 	    
 	    return $tmp;
 	}
+=======
+>>>>>>> 095a712676dee8e026abc405badf61beb84fdc52
 }

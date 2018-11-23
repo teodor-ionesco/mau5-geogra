@@ -1,6 +1,6 @@
 @extends('global')
 
-@section('title')  @endsection
+@section('title') Make quiz @endsection
 
 @section('body')
 
