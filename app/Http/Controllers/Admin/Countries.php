@@ -17,9 +17,17 @@ class Countries extends Controller
     {
     	return view('admin.country', [
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
-            'SECTIONS' => MSections::where('country', $code) -> select(['id', 'name']) -> orderBy('name', 'asc') -> get(),
-    		'GEN' => MGeneralities::where('country', $code) -> orderBy('name', 'asc') -> select(['id', 'name', 'url']) -> get(),
-    		'THEORY' => MTheory::where('section', 0) -> select(['id', 'title']) -> orderBy('title', 'asc') -> get(),
+            'GEN' => MGeneralities::where('country', $code) -> orderBy('name', 'asc') -> select(['id', 'name', 'url']) -> get(),
+
+            'SECTIONS' => MSections::where([
+                ['country', '=', $code],
+                ['section', '=', '0'],
+            ]) -> select(['id', 'name']) -> orderBy('name', 'asc') -> get(),
+
+            'THEORY' => MTheory::where([
+                ['section', '=', '0'],
+                ['country', '=', $code]
+            ]) -> select(['id', 'title']) -> orderBy('title', 'asc') -> get(),
         ]);
     }
 

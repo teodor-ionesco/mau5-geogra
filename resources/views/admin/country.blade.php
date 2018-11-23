@@ -40,6 +40,7 @@
                 <div class="col s12 m8 l6">
                     <form action="{{ url() -> current() }}/sections" method="POST">
                         {{ csrf_field() }}
+                        <input name="section" value="0" hidden="">
                         <table class="striped">
                             <tr>
                                 <td>Title:&nbsp;</td>

@@ -4,7 +4,8 @@
 
 @section('body')
     <div class="container">
-        <p class="flow-text">Countries</p>
+        <p class="flow-text">Countries <i>[<a href="/admin/search">search for something</a>]</i></p>
+        
         <ol class="flow-text">
             @foreach($COUNTRIES as $object)
                 <li><a href="{{ url() -> current() }}/countries/{{ $object -> code }}">{{ $object -> name }}</a>

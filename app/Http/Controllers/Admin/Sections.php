@@ -17,6 +17,7 @@ class Sections extends Controller
 			'COUNTRY' => MCountries::where('code', $code) -> first(),
 			'DATA' => MSections::where('country', $code) -> orderBy('name', 'asc') -> get(),
 			'SCOPE' => 'index',
+            'SECTION' => 0,
 		]);
 	}
 
@@ -26,7 +27,13 @@ class Sections extends Controller
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
     		'DATA' => MTheory::where('section', $id) -> orderBy('title', 'asc') -> get(),
     		'SCOPE' => 'read',
-    		'SECTION' => $id,
+    		'SECTION' => MSections::where('id', $id) -> first(),
+            'SECTIONS' => MSections::where('section', $id) -> get(),
+
+            'SECTIONS_CH' => MSections::where([
+                ['section', '!=', $id],
+                ['id', '!=', $id],
+            ]) -> select(['id', 'name']) -> orderBy('name', 'asc') -> get(),
     	]);
     }
 
@@ -34,11 +41,13 @@ class Sections extends Controller
     {
     	$this -> validate(request(), [
     		'title' => 'required',
+            'section' => 'required|numeric',
     	]);
 
     	MSections::insert([
     		'country' => $code,
     		'name' => request('title'),
+            'section' => request('section'),
     	]);
 
     	return redirect('/admin/countries/' . $code);
@@ -47,8 +56,24 @@ class Sections extends Controller
     public function delete($code, $id)
     {
     	MSections::where('id', $id) -> delete();
+        MSections::where('section', $id) -> delete();
     	MTheory::where('section', $id) -> delete();
 
-    	return redirect('/admin/countries/' . $code);
+    	return redirect(request() -> url() . '/../../');
+    }
+
+    public function update($code, $id)
+    {
+        $this -> validate(request(), [
+            'name' => 'required',
+            'section' => 'required|numeric',
+        ]);
+
+        MSections::where('id', $id) -> update([
+            'name' => request('name'),
+            'section' => request('section'),
+        ]);
+
+        return $this -> read($code, $id);
     }
 }

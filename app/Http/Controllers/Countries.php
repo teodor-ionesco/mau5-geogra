@@ -15,7 +15,12 @@ class Countries extends Controller
     	return view('country', [
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
     		'GEN' => MGEN::where('country', $code) -> select(['url', 'name']) -> orderBy('name', 'asc') -> get(),
-    		'SECTIONS' => MSections::where('country', $code) -> select(['id', 'name']) -> orderBy('name', 'asc') -> get(),
+            
+    		'SECTIONS' => MSections::where([
+                ['country', '=', $code],
+                ['section', '=', '0'],
+            ]) -> select(['id', 'name']) -> orderBy('name', 'asc') -> get(),
+
     		'THEORY' => MTheory::where([
     			['country', '=', $code],
     			['section', '=', '0'],

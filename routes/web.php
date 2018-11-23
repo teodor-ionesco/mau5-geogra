@@ -17,6 +17,8 @@ Route::get('/countries/{code}', 'Countries@read');
 Route::get('/countries/{code}/sections/{id}', 'Sections@read');
 Route::get('/countries/{code}/theory/{id}', 'Theory@read');
 Route::get('/countries/{code}/theory/{id}/quiz', 'Quiz@read');
+Route::get('/search', 'Search@index');
+Route::post('/search', 'Search@perform');
 
 Auth::routes();
 Route::prefix('/register') ->group(function()
@@ -31,6 +33,12 @@ Route::prefix('/register') ->group(function()
 Route::prefix('/admin') -> middleware('auth') -> group(function()
 {
 	Route::get('/', 'Admin\Index@index');
+
+	// Search
+	Route::prefix('search') -> group(function(){
+		Route::get('/', 'Admin\Search@index');
+		Route::post('/', 'Admin\Search@perform');
+	});
 
 	// Countries
 	Route::prefix('/countries') -> group(function()
@@ -51,6 +59,7 @@ Route::prefix('/admin') -> middleware('auth') -> group(function()
 		Route::prefix('/{id}') -> group(function()
 		{
 			Route::get('/', 'Admin\Sections@read');
+			Route::patch('/', 'Admin\Sections@update');
 			Route::get('/delete', 'Admin\Sections@delete');
 			Route::post('/theory', 'Admin\Theory@create');
 		});
@@ -59,7 +68,7 @@ Route::prefix('/admin') -> middleware('auth') -> group(function()
 	// Theory
 	Route::prefix('/countries/{code}/theory') -> group(function()
 	{
-		Route::get('/', function(){return redirect(url() -> current() . '/../');});
+		Route::get('/', function(&$code){return redirect('/admin/countries/'. $code);});
 		Route::post('/', 'Admin\Theory@create');
 
 		Route::prefix('/{id}') -> group(function()
@@ -89,5 +98,10 @@ Route::prefix('/admin') -> middleware('auth') -> group(function()
 		Route::get('/make', 'Admin\Quiz@create');
 		Route::post('/make', 'Admin\Quiz@create');
 		Route::patch('/make', function () {return redirect(url() -> current() . '/../');});
+	});
+
+	// Power off website
+	Route::get('/poweroff', function(){
+		return Artisan::call('down');
 	});
 });
