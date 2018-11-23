@@ -122,6 +122,8 @@ class Search extends Controller
 	*/
 	private function unmap_phrase(string $phrase) : string
 	{
+		$tmp = $phrase;
+
 	    // Trim regex directives
 	    $tmp = str_replace('\.', '.', $tmp);
 	    $tmp = str_replace('\(', '(', $tmp);
