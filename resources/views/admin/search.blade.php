@@ -9,11 +9,7 @@
 			<form method="POST">
 				{{ csrf_field() }}
 				<div style="width: 70%">
-<<<<<<< HEAD
 					<input name="phrase" placeholder="Caută aici.." required="" value="{{ $QUERY }}">
-=======
-					<input name="phrase" placeholder="Caută aici.." required="">
->>>>>>> 095a712676dee8e026abc405badf61beb84fdc52
 					<button style="" type="submit" class="btn blue waves-effect waves-lighten">Caută</button>
 					<a class="btn waves-effect waves-light blue" href="/admin">Înapoi</a>
 				</div>
