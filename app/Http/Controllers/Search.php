@@ -22,9 +22,9 @@ class Search extends Controller
 	public function index()
 	{
 		return view('search', [
-			'QUERY' => $this -> query,
+			'QUERY' => !empty($this -> query) ? $this -> unmap_phrase($this -> query) : null,
 			'RESULTS' => $this -> results,
-			'MESSAGE' => !empty($this -> query) ? $this -> unmap_phrase($this -> query) : null,
+			'MESSAGE' => $this -> message,
 		]);
 	}
 
