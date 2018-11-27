@@ -6,7 +6,7 @@
 
 	<div class="container">
 		<center>
-			<form method="POST">
+			<form method="POST" action="/bac/{{ $YEAR }}/search">
 				{{ csrf_field() }}
 				<div style="width: 70%">
 					<input name="search" placeholder="Caută varianta.." required="" value="{{ $QUERY }}">
