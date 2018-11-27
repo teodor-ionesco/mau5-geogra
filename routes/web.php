@@ -11,15 +11,27 @@
 |
 */
 
+
+/*
+*  Main site
+*/
 Route::get('/', 'Index@index');
 
 Route::get('/countries/{code}', 'Countries@read');
 Route::get('/countries/{code}/sections/{id}', 'Sections@read');
 Route::get('/countries/{code}/theory/{id}', 'Theory@read');
 Route::get('/countries/{code}/theory/{id}/quiz', 'Quiz@read');
+
 Route::get('/search', 'Search@index');
 Route::post('/search', 'Search@perform');
 
+Route::get('/bac/{year}', 'BacSubjects@index');
+Route::get('/bac/{year}/{file}', 'BacSubjects@download');
+Route::post('/bac/{year}/search', 'BacSubjects@search');
+
+/*
+*  Auth
+*/
 Auth::routes();
 Route::prefix('/register') ->group(function()
 {
@@ -30,6 +42,9 @@ Route::prefix('/register') ->group(function()
 	//Route::head('/', function(){return response('404', 404);});
 });
 
+/*
+*  Admin stuff.
+*/
 Route::prefix('/admin') -> middleware('auth') -> group(function()
 {
 	Route::get('/', 'Admin\Index@index');
