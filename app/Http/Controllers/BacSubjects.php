@@ -34,7 +34,7 @@ class BacSubjects extends Controller
 	{	
 		$this -> query = $request -> input('search');
 
-		$files = Storage::files('bac/' . $year);
+		$files = Storage::disk('public') -> files('bac/' . $year);
 	
 		if(empty($files)) {
 			$this -> message = 'Invalid year';
@@ -62,6 +62,6 @@ class BacSubjects extends Controller
 	*/
 	public function download($year, $file)
 	{
-		return Storage::download('bac/'.$year.'/'.$file);
+		return Storage::disk('public') -> download('bac/'.$year.'/'.$file);
 	}
 }
