@@ -47,7 +47,7 @@ class BacSubjects extends Controller
 		foreach($files as $key => $value)
 		{
 			$tmp = $value;
-			$str = str_replace('d_e_f_geografie_cls_12_si_', '', $value);
+			$str = preg_replace('/d_e_f_geografie_cls_12_si?_/', '', $tmp);
 			$str = preg_replace('/^0+[^1-9]?/', '', $str);
 			
 			if($value == $this -> query)
