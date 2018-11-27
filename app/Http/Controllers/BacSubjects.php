@@ -35,7 +35,7 @@ class BacSubjects extends Controller
 		$this -> query = $request -> input('search');
 
 		$files = Storage::disk('public') -> files('bac/' . $year);
-	
+
 		if(empty($files)) {
 			$this -> message = 'Invalid year';
 			return $this -> index($year);
@@ -46,11 +46,11 @@ class BacSubjects extends Controller
 
 		foreach($files as $key => $value)
 		{
-			$tmp = $value;
-			$str = preg_replace('/d_e_f_geografie_cls_12_si?_/', '', $tmp);
-			$str = preg_replace('/^0+[^1-9]?/', '', $str);
-			
-			if($value == $this -> query)
+			$tmp = basename($value);
+			$str = preg_replace('|d_e_f_geografie_cls_12_si+_|', '', $tmp);
+			$str = preg_replace('|^0+[^1-9]?|', '', $str);
+
+			if($str == $this -> query . '.pdf')
 				$this -> files[$key] = $tmp;
 		}
 
