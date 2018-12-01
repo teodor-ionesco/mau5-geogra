@@ -29,6 +29,8 @@ Route::get('/bac/{year}', 'BacSubjects@index');
 Route::get('/bac/{year}/{file}', 'BacSubjects@download');
 Route::post('/bac/{year}/search', 'BacSubjects@search');
 
+Route::get('/static/{target}', 'StaticHandler@read');
+
 /*
 *  Auth
 */
