@@ -20,7 +20,7 @@
 		 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
 		 <script>
 			$("a[link='yes']").ready(function(){
-				$(this).attr('href', $(this).find('img').attr('src'));
+				$(this).find('img').attr('src', $(this).attr('href'));
 			});
 		 	
 		 </script>

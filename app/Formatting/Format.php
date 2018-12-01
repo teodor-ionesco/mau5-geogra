@@ -15,8 +15,8 @@ class Format
 		'[m]' => '<span class="yellow">',
 		'[/m]' => '</span>',
 		'[tab]' => '&nbsp;&nbsp;&nbsp;',
-		'[img]' => '<center><a link="yes" target="_BLANK"><img link="yes" src="',
-		'[/img]' => '"></a></center>',
+		'[img]' => '<center><a link="yes" href="',
+		'[/img]' => '" target="_BLANK"><img link="yes" src=""></a></center>',
 		PHP_EOL => '<br>',
 	];
 
