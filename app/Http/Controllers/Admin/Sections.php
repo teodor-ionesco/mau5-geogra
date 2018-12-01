@@ -28,12 +28,7 @@ class Sections extends Controller
     		'DATA' => MTheory::where('section', $id) -> orderBy('title', 'asc') -> get(),
     		'SCOPE' => 'read',
     		'SECTION' => MSections::where('id', $id) -> first(),
-<<<<<<< HEAD
-            'SECTIONS' => MSections::where('section', $id) -> get(),
-=======
             'SECTIONS' => MSections::where('section', $id) -> orderBy('name', 'asc') -> get(),
->>>>>>> 095a712676dee8e026abc405badf61beb84fdc52
-
             'SECTIONS_CH' => MSections::where([
                 ['section', '!=', $id],
                 ['id', '!=', $id],
