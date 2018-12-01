@@ -20,7 +20,7 @@ class Countries extends Controller
             'GEN' => MGeneralities::where([
                 ['country', '=', $code],
                 ['section', '=', '0'],
-            ]) -> select(['url', 'name']) -> orderBy('name', 'asc') -> get(),
+            ]) -> select(['id', 'url', 'name']) -> orderBy('name', 'asc') -> get(),
 
             'SECTIONS' => MSections::where([
                 ['country', '=', $code],
