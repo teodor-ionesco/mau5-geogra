@@ -17,7 +17,7 @@ class Countries extends Controller
     {
     	return view('admin.country', [
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
-            'GEN' => MGEN::where([
+            'GEN' => MGeneralities::where([
                 ['country', '=', $code],
                 ['section', '=', '0'],
             ]) -> select(['url', 'name']) -> orderBy('name', 'asc') -> get(),
