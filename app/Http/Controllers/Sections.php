@@ -15,7 +15,7 @@ class Sections extends Controller
         return view('sections', [
             'THEORY' => MTheory::where('section', $id) -> select(['title', 'id']) -> orderBy('title', 'asc') -> get(),
             'COUNTRY' => MCountries::where('code', $code) -> first(),
-            'GENERALITIES' => MGeneralities::where('country', $code) -> orderBy('name', 'asc') -> get(),
+            'GENERALITIES' => MGeneralities::where('section', $id) -> orderBy('name', 'asc') -> get(),
             'SECTION' => MSections::where('id', $id) -> select(['id', 'name']) -> first(),
             
             'SECTIONS' => MSections::where([
