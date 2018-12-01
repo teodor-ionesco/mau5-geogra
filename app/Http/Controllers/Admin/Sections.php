@@ -27,7 +27,7 @@ class Sections extends Controller
     	return view('admin.sections', [
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
     		'DATA' => MTheory::where('section', $id) -> orderBy('title', 'asc') -> get(),
-            'GENERALITIES' => MGeneralities::where('section', $id) -> orderBy('title', 'asc') -> get(),            
+            'GENERALITIES' => MGeneralities::where('section', $id) -> orderBy('name', 'asc') -> get(),            
     		'SCOPE' => 'read',
     		'SECTION' => MSections::where('id', $id) -> first(),
             'SECTIONS' => MSections::where('section', $id) -> orderBy('name', 'asc') -> get(),
