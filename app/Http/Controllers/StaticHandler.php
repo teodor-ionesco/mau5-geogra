@@ -9,6 +9,6 @@ class StaticHandler extends Controller
 {
 	public function read($target)
 	{
-		return Storage::disk('local') -> download($target);
+		return Storage::disk('public') -> download('/'.$target);
 	}
 }
