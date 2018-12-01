@@ -19,6 +19,7 @@ class Generalities extends Controller
     		'country' => $code,
     		'name' => request('title'),
     		'url' => request('url'),
+            'section' => empty(request('section')) ? 0 : request('section'),
     	]);
 
     	return redirect(url() -> current() . '/../');

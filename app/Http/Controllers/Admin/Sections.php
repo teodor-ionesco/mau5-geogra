@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Countries as MCountries;
 use App\Theory as MTheory;
 use App\Sections as MSections;
+use App\Generalities as MGeneralities;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,6 +27,7 @@ class Sections extends Controller
     	return view('admin.sections', [
     		'COUNTRY' => MCountries::where('code', $code) -> first(),
     		'DATA' => MTheory::where('section', $id) -> orderBy('title', 'asc') -> get(),
+            'GENERALITIES' => MGeneralities::where('section', $id) -> orderBy('title', 'asc') -> get(),            
     		'SCOPE' => 'read',
     		'SECTION' => MSections::where('id', $id) -> first(),
             'SECTIONS' => MSections::where('section', $id) -> orderBy('name', 'asc') -> get(),
@@ -57,6 +59,7 @@ class Sections extends Controller
     	MSections::where('id', $id) -> delete();
         MSections::where('section', $id) -> delete();
     	MTheory::where('section', $id) -> delete();
+        MGeneralities::where('section', $id) -> delete();
 
     	return redirect(request() -> url() . '/../../');
     }

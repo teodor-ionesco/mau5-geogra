@@ -7,6 +7,10 @@
 		<p class="flow-text">Bună! Ce doriți să repetați?</p>
 
 		<ol class="flow-text">
+            @foreach($GENERALITIES as $object)
+                <li><a target="_BLANK" href="{{ $object -> url}}">{{ $object -> name }}</a></li>
+            @endforeach	
+            		
 			@foreach($SECTIONS as $object)
 				<li><a href="{{ url() -> current() }}/../{{ $object -> id }}">{{ $object -> name }}</a></li>
 			@endforeach

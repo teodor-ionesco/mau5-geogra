@@ -43,6 +43,31 @@
                 <br>
                 <div class="divider"></div>
 
+                @foreach($GENERALITIES as $object)
+                    <li><a href="{{ $object -> url}}">{{ $object -> name }}</a>
+                    &nbsp;
+                    <i>(<a class="red-text" href="/admin/countries/{{$COUNTRY -> code}}/generalities/{{ $object -> id }}/delete">delete</a>)</i></li>
+                @endforeach
+                <div class="row" style="position:relative; right: 40px;">
+                    <div class="col s12 m8 l6">
+                        <form action="/admin/countries/{{ $COUNTRY -> code }}/generalities" method="POST">
+                            {{ csrf_field() }}
+                            <input name="section" value="{{ $SECTION -> id}}" hidden="">
+                            <table class="striped">
+                                <tr>
+                                    <td>Title:&nbsp;</td>
+                                    <td><input type="text" required="" name="title"></td>
+                                </tr>    
+                                <tr>
+                                    <td>URL:&nbsp;</td>
+                                    <td><input type="text" required="" name="url"></td>
+                                </tr>   
+                            </table>
+                            <button type="submit" class="btn waves-effect waves-light red" >Add</button>
+                        </form>
+                    </div>
+                </div>
+
                 @foreach($SECTIONS as $object)
                     <li><a href="/admin/countries/{{$COUNTRY -> code}}/sections/{{ $object -> id }}">{{ $object -> name }}</a>
                     &nbsp;
