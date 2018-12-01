@@ -19,8 +19,9 @@
 		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>-->
 		 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
 		 <script>
-			$("a[link='yes']").ready(function(){
-				$(this).find('img').attr('src', $(this).attr('href'));
+			$("a[link='yes']").each(function(){
+				var tmp = $(this).attr('href');
+				$(this).find('img').attr('src', tmp);
 			});
 		 	
 		 </script>
