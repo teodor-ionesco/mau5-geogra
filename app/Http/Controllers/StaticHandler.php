@@ -9,6 +9,6 @@ class StaticHandler extends Controller
 {
 	public function read($target)
 	{
-		return response() -> file('/storage/app/public/'.$target);
+		return response() -> file(base_path() . '/storage/app/public/'.$target);
 	}
 }
